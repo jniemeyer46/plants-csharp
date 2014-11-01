@@ -19,6 +19,11 @@
 #endif
 
 /* First, we deal with  platform-specific or compiler-specific issues. */
+#ifdef _WIN32
+#ifndef YY_NO_UNISTD_H
+#define YY_NO_UNISTD_H
+#endif
+#endif
 
 /* begin standard C headers. */
 #include <stdio.h>

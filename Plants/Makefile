@@ -6,9 +6,9 @@ submit: Main.class
 	@echo "$(shell cd ..;sh submit.sh c)"
 
 
-libclient.so: Plants/library/*.cpp Plants/library/*.h
-	$(MAKE) -C Plants/library/ libclient.so
-	cp -f Plants/library/libclient.so libclient.so
+libclient.so: library/*.cpp library/*.h
+	$(MAKE) -C library/ libclient.so
+	cp -f library/libclient.so libclient.so
 
 client.exe: $(CSFILES) libclient.so
 	gmcs -out:client.exe  $(CSFILES)

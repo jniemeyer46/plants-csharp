@@ -43,7 +43,7 @@ DLLEXPORT int open_server_connection(const char* host, const char* port)
         return -1;
     }
 
-    char* address = strdup(host);
+    char* address = _strdup(host);
 
     if(strchr(address, ':'))
     {

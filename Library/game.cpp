@@ -11,7 +11,7 @@
 #include <fstream>
 #include <memory>
 #include <vector>
-
+#include <algorithm>
 #include "game.h"
 #include "network.h"
 #include "structures.h"
@@ -28,7 +28,7 @@
 //Doh, namespace collision.
 namespace Windows
 {
-    #include <Windows.h>
+    
 };
 #else
 #include <unistd.h>
@@ -316,7 +316,7 @@ DLLEXPORT int playerGerminate(_Player* object, int x, int y, int mutation)
   if (!inRange)
     return 0;
 
-  for(int i = 0; i < thisTurnPlants.size(); i++)
+  for(unsigned int i = 0; i < thisTurnPlants.size(); i++)
   {
     if(thisTurnPlants[i].x == x && thisTurnPlants[i].y == y)
     {
@@ -513,7 +513,7 @@ void parsePlayer(Connection* c, _Player* object, sexp_t* expression)
   strncpy(object->playerName, sub->val, strlen(sub->val));
   object->playerName[strlen(sub->val)] = 0;
   sub = sub->next;
-  object->time = atof(sub->val);
+  object->time = (float)atof(sub->val);
   sub = sub->next;
   object->spores = atoi(sub->val);
   sub = sub->next;
@@ -613,7 +613,7 @@ DLLEXPORT int networkLoop(Connection* c)
 {
   while(true)
   {
-    sexp_t* base, *expression, *sub, *subsub;
+    sexp_t* base, *expression, *sub;
 
     char* message = rec_string(c->socket);
     string text = message;

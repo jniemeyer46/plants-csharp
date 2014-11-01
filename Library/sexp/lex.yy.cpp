@@ -16,6 +16,12 @@
 
 /* First, we deal with  platform-specific or compiler-specific issues. */
 
+#ifdef _WIN32
+#ifndef YY_NO_UNISTD_H
+#define YY_NO_UNISTD_H
+#endif
+#endif
+
 /* begin standard C headers. */
 #include <stdio.h>
 #include <string.h>
@@ -1322,6 +1328,16 @@ static void yy_load_buffer_state  (void)
 	yyfree((void *) b  );
 }
 
+#ifdef _WIN32
+extern "C"
+{
+	extern int isatty(int);
+}
+#else
+#ifndef __cplusplus
+	extern int isatty(int);
+#endif /* __cplusplus */
+#endif
 /* Initializes or reinitializes a buffer.
  * This function is sometimes called more than once on the same buffer,
  * such as during a yyrestart() or at EOF.
@@ -1345,7 +1361,7 @@ static void yy_load_buffer_state  (void)
         b->yy_bs_column = 0;
     }
 
-        b->yy_is_interactive = file ? (isatty( fileno(file) ) > 0) : 0;
+        b->yy_is_interactive = file ? (isatty( _fileno(file) ) > 0) : 0;
     
 	errno = oerrno;
 }
@@ -1536,7 +1552,7 @@ YY_BUFFER_STATE yy_scan_bytes  (yyconst char * yybytes, yy_size_t  _yybytes_len 
 	YY_BUFFER_STATE b;
 	char *buf;
 	yy_size_t n;
-	int i;
+	unsigned int i;
     
 	/* Get memory for full buffer, including space for trailing EOB's. */
 	n = _yybytes_len + 2;
