@@ -1,7 +1,6 @@
 namespace Plants
 {
 	using System;
-	using System.Diagnostics;
 
 	public class Program
 	{
@@ -38,10 +37,9 @@ namespace Plants
 					Client.getStatus(connection);
 			}
 
-			Client.networkLoop(connection); 
-			Client.networkLoop(connection); 
+			Client.networkLoop(connection);
+			Client.networkLoop(connection);
 			ai.end();
 		}
 	}
-
 }
