@@ -52,7 +52,7 @@ using std::ofstream;
 //distance helper function
 int dist(int x1, int y1, int x2, int y2)
 {
-  return static_cast<int>(floor(sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2))));
+  return static_cast<int>(floor(sqrt(pow((float)(x1 - x2), 2) + pow((float)(y1 - y2), 2))));
 }
 
 DLLEXPORT Connection* createConnection()
