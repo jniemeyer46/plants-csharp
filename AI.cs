@@ -57,6 +57,13 @@ class AI : BaseAI
         {
           Plant foe = plants[i];
 
+
+          //don't attack yourself!
+          if(foe.Id == plant.Id)
+          {
+             continue;
+          }
+
           //if it's dead skip it
           if(foe.Rads >= foe.MaxRads)
           {
